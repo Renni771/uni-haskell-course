@@ -12,25 +12,11 @@ maxi a b
   | a == b = a
   | a /= b = if a > b then a else b
 
--- maxi tests
-prop_maxi :: Int -> Int -> Bool
-prop_maxi a b
-  | a == b = maxi a b == a && maxi a b == b
-  | a > b = maxi a b == a
-  | a < b = maxi a b == b
-
 -- | Find the minimum of two integers
 mini :: Int -> Int -> Int
 mini a b
   | a == b = a
   | a /= b = if a < b then a else b
-
--- mini tests
-prop_mini :: Int -> Int -> Bool
-prop_mini a b
-  | a == b = mini a b == a && mini a b == b
-  | a > b = mini a b == b
-  | a < b = mini a b == a
 
 -- 1.2
 
@@ -44,6 +30,24 @@ max3 a b c
   | a == b && b > a = maxi a (maxi b c)
   | a == c && b > a = maxi a (maxi b c)
 
+-- 1.3
+-- TODO:
+
+-- 1.4
+-- maxi tests
+prop_maxi :: Int -> Int -> Bool
+prop_maxi a b
+  | a == b = maxi a b == a && maxi a b == b
+  | a > b = maxi a b == a
+  | a < b = maxi a b == b
+
+-- mini tests
+prop_mini :: Int -> Int -> Bool
+prop_mini a b
+  | a == b = mini a b == a && mini a b == b
+  | a > b = mini a b == b
+  | a < b = mini a b == a
+
 -- max3 tests
 prop_max3 :: Int -> Int -> Int -> Bool
 prop_max3 a b c
@@ -53,9 +57,6 @@ prop_max3 a b c
   | c > b && b > a = max3 a b c == c -- c is the biggest
   | a == b && b > a = max3 a b c == a -- c is the biggest
   | a == c && b > a = max3 a b c == a -- c is the biggest
-
--- 1.3
--- TODO:
 
 -- Exercise 2
 -- TODO:

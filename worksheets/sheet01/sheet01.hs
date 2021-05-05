@@ -59,7 +59,30 @@ prop_max3 a b c
   | a == c && b > a = max3 a b c == a -- c is the biggest
 
 -- Exercise 2
--- TODO:
+push :: [Int] -> n -> [Int]
+push = undefined
+
+pop :: [Int] -> [Int]
+pop = undefined
+
+-- | Duplicate the top value on the stack
+dup :: [Int] -> [Int]
+dup = undefined
+
+add :: [Int] -> [Int]
+add = undefined
+
+substract :: [Int] -> [Int]
+substract = undefined
+
+multiply :: [Int] -> [Int]
+multiply = undefined
+
+neg :: [Int] -> [Int]
+neg = undefined
+
+readCommand :: String -> [Int] -> [Int]
+readCommand = undefined
 
 -- Exercise 3
 head' :: [a] -> a

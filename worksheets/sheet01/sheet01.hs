@@ -8,34 +8,41 @@ import Data.List
 
 -- | Find the maximum of two integers.
 maxi :: Int -> Int -> Int
-maxi a b | a == b = a
-maxi a b | a /= b = if a > b then a else b
+maxi a b
+  | a == b = a
+  | a /= b = if a > b then a else b
 
 -- maxi tests
-prop_maxi a b | a == b = maxi a b == a && maxi a b == b
-prop_maxi a b | a > b = maxi a b == a
-prop_maxi a b | a < b = maxi a b == b
+prop_maxi :: Int -> Int -> Bool
+prop_maxi a b
+  | a == b = maxi a b == a && maxi a b == b
+  | a > b = maxi a b == a
+  | a < b = maxi a b == b
 
 -- | Find the minimum of two integers
 mini :: Int -> Int -> Int
-mini a b | a == b = a
-mini a b | a /= b = if a < b then a else b
+mini a b
+  | a == b = a
+  | a /= b = if a < b then a else b
 
 -- mini tests
-prop_mini a b | a == b = mini a b == a && mini a b == b
-prop_mini a b | a > b = mini a b == b
-prop_mini a b | a < b = mini a b == a
+prop_mini :: Int -> Int -> Bool
+prop_mini a b
+  | a == b = mini a b == a && mini a b == b
+  | a > b = mini a b == b
+  | a < b = mini a b == a
 
 -- 1.2
 
 -- | Find the maximum of three integers
 max3 :: Int -> Int -> Int -> Int
-max3 a b c | a == b && b == c = a
-max3 a b c | a > b && b > c = maxi a (maxi b c)
-max3 a b c | b > a && a > c = maxi a (maxi b c)
-max3 a b c | c > b && b > a = maxi a (maxi b c)
-max3 a b c | a == b && b > a = maxi a (maxi b c)
-max3 a b c | a == c && b > a = maxi a (maxi b c)
+max3 a b c
+  | a == b && b == c = a
+  | a > b && b > c = maxi a (maxi b c)
+  | b > a && a > c = maxi a (maxi b c)
+  | c > b && b > a = maxi a (maxi b c)
+  | a == b && b > a = maxi a (maxi b c)
+  | a == c && b > a = maxi a (maxi b c)
 
 -- max3 tests
 prop_max3 :: Int -> Int -> Int -> Bool
@@ -76,9 +83,12 @@ reverse' :: [x] -> [x]
 reverse' [] = []
 reverse' (x : xs) = reverse' xs ++ [x]
 
--- (++) = undefined
+(~++) :: [a] -> [a] -> [a]
+(~++) [] ys = ys
+(~++) (x : xs) ys = x : xs ++ ys
 
-iterate' = undefined
+iterate'' :: (x -> x) -> x -> [x]
+iterate'' f x = x : iterate'' f (f x)
 
 map' :: (a -> b) -> [a] -> [b]
 map' _ [] = []
@@ -92,9 +102,15 @@ intersperse' :: Char -> String -> String
 intersperse' ' ' "" = ""
 intersperse' a (b : bs) = b : a : intersperse' a bs
 
-concat' = undefined
+concat' :: [[a]] -> [a]
+concat' [] = []
+concat' [a] = a
+concat' (a : as) = a ++ concat' as
 
-zipWith' = undefined
+zipWith' :: (t -> t -> t) -> [t] -> [t] -> [t]
+zipWith' f [] ys = ys
+zipWith' f xs [] = xs
+zipWith' f (x : xs) (y : ys) = f x y : zipWith' f xs ys
 
 repeat' = undefined
 

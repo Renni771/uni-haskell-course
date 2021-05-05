@@ -46,14 +46,16 @@ max3 a b c
 
 -- max3 tests
 prop_max3 :: Int -> Int -> Int -> Bool
-prop_max3 a b c | a == b && b == c = max3 a b c == a && max3 a b c == b && max3 a b c == c
-prop_max3 a b c | a > b && b > c = max3 a b c == a -- a is the biggest
-prop_max3 a b c | b > a && a > c = max3 a b c == b -- b is the biggest
-prop_max3 a b c | c > b && b > a = max3 a b c == c -- c is the biggest
-prop_max3 a b c | a == b && b > a = max3 a b c == a -- c is the biggest
-prop_max3 a b c | a == c && b > a = max3 a b c == a -- c is the biggest
+prop_max3 a b c
+  | a == b && b == c = max3 a b c == a && max3 a b c == b && max3 a b c == c
+  | a > b && b > c = max3 a b c == a -- a is the biggest
+  | b > a && a > c = max3 a b c == b -- b is the biggest
+  | c > b && b > a = max3 a b c == c -- c is the biggest
+  | a == b && b > a = max3 a b c == a -- c is the biggest
+  | a == c && b > a = max3 a b c == a -- c is the biggest
+
 -- 1.3
--- 1.4
+-- TODO:
 
 -- Exercise 2
 -- TODO:
@@ -112,12 +114,26 @@ zipWith' f [] ys = ys
 zipWith' f xs [] = xs
 zipWith' f (x : xs) (y : ys) = f x y : zipWith' f xs ys
 
-repeat' = undefined
+repeat' :: a -> [a]
+repeat' a = a : repeat' a
 
-and' = undefined
+and' :: [Bool] -> Bool
+and' [] = True
+and' [a] = a
+and' (x : xs) = x && and' xs
 
-takeWhile' = undefined
+takeWhile' :: (a -> Bool) -> [a] -> [a]
+takeWhile' _ [] = []
+takeWhile' f (x : xs)
+  | f x = x : takeWhile' f xs
+  | otherwise = []
 
-dropWhile' = undefined
+dropWhile' :: (a -> Bool) -> [a] -> [a]
+dropWhile' _ [] = []
+dropWhile' f xs@(x : xs')
+  | f x = dropWhile' f xs'
+  | otherwise = xs
 
-maximum' = undefined
+maximum' :: Ord a => [a] -> a
+maximum' [a] = a
+maximum' (a : as) = max a (maximum' as)

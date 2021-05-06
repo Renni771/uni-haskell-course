@@ -59,30 +59,46 @@ prop_max3 a b c
   | a == c && b > a = max3 a b c == a -- c is the biggest
 
 -- Exercise 2
-push :: [Int] -> n -> [Int]
-push = undefined
+stack :: [Int]
+stack = repeat 0
 
-pop :: [Int] -> [Int]
-pop = undefined
+-- | Push a value to the to of the stack
+push :: Int -> [Int]
+push n 
+  | stack == repeat 0 = [n]
+  | otherwise = n : stack
+
+
+-- | Remove the top value from the stack
+pop :: [Int]
+pop = tail stack
 
 -- | Duplicate the top value on the stack
-dup :: [Int] -> [Int]
-dup = undefined
+dup :: [Int]
+dup = head stack : stack
 
-add :: [Int] -> [Int]
-add = undefined
+add :: [Int]
+add = [sum stack]
 
-substract :: [Int] -> [Int]
-substract = undefined
+subtract' :: [Int]
+subtract' = undefined
 
-multiply :: [Int] -> [Int]
-multiply = undefined
+-- multiply :: [Int]
+-- multiply = foldr (*) stack 0
 
-neg :: [Int] -> [Int]
+-- multiply stack = undefined
+
+neg :: [Int]
 neg = undefined
 
 readCommand :: String -> [Int] -> [Int]
-readCommand = undefined
+readCommand command newStack
+  | command == "dup" = dup
+  | command == "add" = add
+  | command == "subtract" = subtract'
+  -- | command == "multiply" = multiply
+  | command == "neg" = neg
+  | otherwise = stack
 
 -- Exercise 3
 head' :: [a] -> a

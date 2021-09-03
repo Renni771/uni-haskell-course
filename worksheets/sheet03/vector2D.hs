@@ -1,3 +1,6 @@
+module Vector2D where
+
+-- | Represents a point in 2D space.
 data Vector2D =  Vector2D Double Double
     deriving (Eq)
 
@@ -14,5 +17,12 @@ instance Num Vector2D where
 
     negate (Vector2D x y) = Vector2D (-x)(-y)
 
+instance Semigroup Vector2D where
+  (<>) = (+)
+
+instance Monoid Vector2D where
+  mempty = Vector2D 0 0
+  mappend a b = a <> b
+
 instance Show Vector2D where
-    show (Vector2D x y) = "Vector2D(x: " ++ show x ++ ", y: " ++ show y ++ ")"
+    show (Vector2D x y) = "(x: " ++ show x ++ ", y: " ++ show y ++ ")"

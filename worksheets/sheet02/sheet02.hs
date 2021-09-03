@@ -33,7 +33,3 @@ prop_undup a
 -- A natural number k ≥ 2 is factor of a number n if there exists m such that n = k · m. Define a
 -- function that computes the smallest factor of a given Int.
 -- Try to solve the tasks in two different ways and test them against each other.
-
--- Exercise 4. (Media Library)
-
--- Exercise 5. (Tic-Tac-Toe)
